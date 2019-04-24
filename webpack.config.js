@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   entry: './src/main.js',
@@ -56,16 +57,43 @@ module.exports = {
         }
       },
       {
+        test: /\.pug$/,
+        oneOf: [
+          // это применяется к `<template lang="pug">` в компонентах Vue
+          {
+            resourceQuery: /^\?vue/,
+            use: ['pug-plain-loader']
+          },
+          // это применяется к импортам pug внутри JavaScript
+          {
+            use: ['raw-loader', 'pug-plain-loader']
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
+        include: [
+          path.resolve(__dirname, 'src/assets/fonts/')
+        ],
+        use: [
+          {
+            loader: 'file-loader?name=./src/assets/fonts/[name]/[name].[ext]'
+          }
+        ]
+      },
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
+        include: [
+          path.resolve(__dirname, 'src/assets/img/')
+        ],
+        use: [
+          'file-loader?name=./src/assets/img/[name].[ext]'
+        ]
       }
     ]
   },
