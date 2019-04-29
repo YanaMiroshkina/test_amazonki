@@ -1,0 +1,259 @@
+/* ======== WIDE MOBILE < 1000px ======== */
+
+@media (max-width: 999px)
+  .header
+    height: auto
+
+  .nav
+    padding: 0 10px 10px
+    width: 100%
+    text-align: center
+
+    &:before
+      display: none
+
+    &__logo,
+    &__btn
+      font-size: 14px
+      line-height: 28px
+
+    &__logo
+      display: block
+      margin: 0 auto
+      padding-top: 10px
+      padding-bottom: 5px
+      width: 213px
+      height: 60px
+      text-align: center
+
+      & > svg
+        width: auto
+        height: 100%
+
+    &__btn:nth-child(2),
+    &__btn:nth-child(3),
+    &__btn:nth-child(4),
+    &__btn:nth-child(5)
+      padding: 5px 12px
+      width: auto
+
+    &__btn.active
+      color: white
+      text-shadow: 1px 1px 3px green
+      background: rgba(0, 165, 20, 0.31)
+      border: 1px solid #7dda7d
+      -webkit-border-radius: 5px
+      border-radius: 5px
+      -webkit-box-shadow: inset 0 0 17px -4px rgba(0, 0, 0, 0.2)
+      box-shadow: inset 0 0 17px -4px rgba(0, 0, 0, 0.2)
+
+  /* --- width on large mobile 100% --- */
+  .mobw100
+    width: 100%
+
+  .main
+    padding-bottom: 120px
+    width: 80%
+
+  .aside
+    width: 100%
+
+    &__image,
+    &__inner
+      width: 100%
+
+    &__inner
+      padding: 10px 15px 15px
+      line-height: inherit
+
+  .article
+    padding: 40px 30px
+    width: 100%
+    -webkit-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3)
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3)
+
+  .main--error
+    padding: 40px 0
+
+  .amazonka
+    margin-top: -70px
+    width: 250px
+    height: 280px
+    background-position: -14px 49px
+
+  .num-error
+    font-size: 68px
+    line-height: 104px
+
+  .text-error
+    padding: 8px 15px
+    font-size: 15px
+
+  .yandex-map
+    height: 400px
+
+  .highlighted
+    padding: 6px 20px 4px
+
+  .cta
+    padding-left: 17px
+    padding-right: 17px
+    max-width: 240px
+    font-size: 16px
+    -webkit-border-radius: 3px
+    border-radius: 3px
+
+  .table
+    margin-left: auto
+    margin-right: auto
+    width: 262px
+    font-size: 13px
+
+  .table strong
+    font-size: 13px
+
+  .table-gym-mobile td:first-child
+    width: 110px
+
+  .table-gym-mobile td:nth-child(2n)
+    width: 152px
+
+  caption
+    font-size: 18px
+    line-height: 22px
+
+  thead td
+    font-family: 'istok-r'
+
+  td
+    padding: 7px 5px 5px
+
+  /* --- no highlight for columns and rows on mobile --- */
+  .table tbody tr:hover,
+  .table td:not(:first-child):hover:after
+    background-color: initial
+
+  .table tr:nth-child(2n):hover
+    background: rgba(36, 154, 36, 0.06)
+
+  .modal
+    max-width: 90%
+
+    &__inner
+      padding: 30px 27px 35px
+
+    .h1,
+    .h2
+      max-width: 204px
+
+    &__close
+      top: 0
+      right: 0
+      width: 50px
+      height: 50px
+      background-color: #e6e6e6
+      -webkit-border-bottom-left-radius: 70%
+      border-bottom-left-radius: 70%
+
+    &:hover
+      background-color: #d4d0d0
+
+      &:before,
+      &:after
+        background-color: white
+
+  /* ------ DIFFERENT MODALS ----- */
+
+  .footer
+    height: 80px
+
+  .footer
+    &__inner
+      width: 100%
+      font-size: 12px
+      line-height: 39px
+      text-align: center
+
+    &__copyright
+      margin-left: 0
+
+    &__contacts
+      margin-left: 5px
+
+    &__phone
+      margin-left: 4px
+
+  .pulse
+    width: 100%
+
+/* ====== SMALL MOBILE < 480px ====== */
+
+@media (max-width: 479px)
+  .h1
+    font-size: 23px
+
+  .h2
+    font-size: 21px
+
+  .h2-index
+    font-size: 18px
+
+  .h3
+    font-size: 18px
+
+  .h4
+    font-size: 16px
+
+  .main
+    width: 100%
+
+  .aside
+    &__image,
+    &__inner
+      margin-left: auto
+      margin-right: auto
+      width: 90%
+
+  .article
+    padding: 40px 20px
+
+  .amazonka
+    margin-top: -17px
+    margin-right: 0
+    padding-top: 115%
+    width: 100%
+    height: 0
+    -webkit-background-size: 100% auto
+    -o-background-size: 100% auto
+    background-size: 100% auto
+    background-position: 0 0
+    -webkit-border-radius: 0
+    border-radius: 0
+
+    &:before
+      display: none
+
+  .yandex-map
+    height: 200px
+
+  .musculature
+    width: 100%
+
+  .slide
+    &__arrow
+      font-size: 28px
+      &--left
+        left: -5px
+      &--right
+        right: -5px
+
+      &:before
+        top: auto
+        -webkit-transform: none
+        -moz-transform: none
+        -ms-transform: none
+        -o-transform: none
+        transform: none
+        bottom: 3px
+        -webkit-box-shadow: inset 0 0 10px white, 0 0 13px 6px white
+        box-shadow: inset 0 0 10px white, 0 0 13px 6px white

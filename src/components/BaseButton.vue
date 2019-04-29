@@ -1,6 +1,6 @@
 <template lang='pug'>
 
-   a(:href='base_btn.route').cta.dib-center.mt-m {{ base_btn.btn_text }}
+   router-link(:to='base_btn.route').cta.dib-center.mt-m {{ base_btn.btn_text }}
 
 </template>
 

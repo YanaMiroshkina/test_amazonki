@@ -1,12 +1,18 @@
 var path = require('path')
 var webpack = require('webpack')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const UglifyJsPlugin = require('uglify-js-plugin')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+var CleanWebpacktPlugin = require("clean-webpack-plugin")
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var HtmlWebpackPlugin = require("vue-html-webpack-plugin")
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    // publicPath: '/dist/',
     filename: 'build.js'
   },
   module: {
@@ -14,14 +20,18 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
+          process.env.NODE_ENV !== 'production'
+            ? 'vue-style-loader'
+            : MiniCssExtractPlugin.loader,
           'css-loader'
         ],
       },
       {
         test: /\.scss$/,
         use: [
-          'vue-style-loader',
+          process.env.NODE_ENV !== 'production'
+            ? 'vue-style-loader'
+            : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ],
@@ -29,7 +39,9 @@ module.exports = {
       {
         test: /\.sass$/,
         use: [
-          'vue-style-loader',
+          process.env.NODE_ENV !== 'production'
+            ? 'vue-style-loader'
+            : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader?indentedSyntax'
         ],
@@ -43,12 +55,16 @@ module.exports = {
             // the "scss" and "sass" values for the lang attribute to the right configs here.
             // other preprocessors should work out of the box, no loader config like this necessary.
             'scss': [
-              'vue-style-loader',
+              process.env.NODE_ENV !== 'production'
+                ? 'vue-style-loader'
+                : MiniCssExtractPlugin.loader,
               'css-loader',
               'sass-loader'
             ],
             'sass': [
-              'vue-style-loader',
+              process.env.NODE_ENV !== 'production'
+                ? 'vue-style-loader'
+                : MiniCssExtractPlugin.loader,
               'css-loader',
               'sass-loader?indentedSyntax'
             ]
@@ -111,7 +127,33 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new CleanWebpacktPlugin(),
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    }),
+    // new MiniCssExtractPlugin({
+    //   // Options similar to the same options in webpackOptions.output
+    //   // both options are optional
+    //   filename: '[name].css',
+    //   chunkFilename: '[id].css',
+    // })
+    new HtmlWebpackPlugin({
+      vue: true
+    })
+  ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: true,
+        compress: {
+          warnings: false,
+        },
+      }),
+    ],
+  },
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -123,12 +165,12 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })

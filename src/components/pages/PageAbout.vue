@@ -1,0 +1,40 @@
+<template lang='pug'>
+  
+  .wrapper
+    header-block(:active="'about'")
+    main.main.cf
+      aside-block(:aside="'notices'")
+      article-block(:article="'about'")
+    footer-block
+  
+
+</template>
+
+<script>
+
+import TheHeader from '../page-sections/TheHeader'
+import TheAside from '../page-sections/TheAside'
+import TheArticle from '../page-sections/TheArticle'
+import TheFooter from '../page-sections/TheFooter'
+
+export default {
+  components: {
+    'header-block': TheHeader,
+    'aside-block': TheAside,
+    'article-block': TheArticle,
+    'footer-block': TheFooter
+  },
+  data () {
+    return {
+      
+    }
+  }
+}
+
+</script>
+
+<style lang="sass">
+
+
+
+</style>

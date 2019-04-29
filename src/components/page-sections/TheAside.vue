@@ -2,9 +2,17 @@
 
   aside.aside.fl
 
-    template(v-if='!(img_notices || text_notices)')
+    template(v-if="aside=='notices' && img_notices")
+      img(@click="open_modal(notice['img_path'])" v-for='notice in img_notices' :src="'./src/assets/img/' + notice['img_path']" :alt="notice['alt']").aside__img.mb-m
 
-      .aside__inner(itemscope itemtype='http://schema.org/Organization')
+    template(v-if="aside=='notices' && text_notices")
+      .aside__inner.mb-m(v-for='notice in text_notices')
+        h3.mb-xs {{ notice.title }}
+        p {{ notice.text }}
+
+    template(v-if="aside=='contacts'")
+
+      .aside__inner.mb-m(itemscope itemtype='http://schema.org/Organization')
         h2.h2.mb-s Контакты
         
         p
@@ -18,23 +26,15 @@
           |, 
           span(itemprop='streetAddress')  ул. Тестовая, 1
         address тел.: 
-        span(itemprop='telephone')  
-          a(href='tel:+74822123456')
-            span.dn +7 (4822) 
-            | 123-456
+          span(itemprop='telephone')  
+            a(href='tel:+74822123456')
+              span.dn +7 (4822) 
+              | 123-456
         address.mt-s email: 
           a(itemprop='email' href='mailto:fake-email@yandex.ru').color-green fake-email@yandex.ru
         address ВК: 
           a(itemprop='sameAs' href='//vk.com/' target='_blank' title='Фитнес-клуб «Амазонки» в Твери').color--green  vk.com/fake-vk-group
         a(href='https://api-maps.yandex.ru/frame/v1/-/C6a3RWpH' title='Посмотреть на карте женский фитнес-клуб «Амазонки» в Твери' target='_blank').aside__map.mt-s
-
-    template(v-if='img_notices')
-      img(v-for='notice in img_notices' :src="'./src/assets/img/notices/' + notice['img']" :alt="notice['alt']").aside__img.mb-m
-
-    template(v-if='text_notices')
-      .aside__inner.mb-m(v-for='notice in text_notices')
-        h3.mb-xs {{ notice.title }}
-        p {{ notice.text }}
 
 
 
@@ -42,11 +42,19 @@
 
 <script>
 
+import {bus} from '../../main'
+
 export default {
+  props: ['aside'],
   data () {
     return {
-      img_notices: this.$store.state.img_notices,
+      img_notices: this.$store.getters.img_notices,
       text_notices: this.$store.state.text_notices
+    }
+  },
+  methods: {
+    open_modal: function(img_path) {
+      bus.$emit('open_modal', {type: 'img', img_path: img_path})
     }
   }
 }
@@ -78,7 +86,7 @@ export default {
     display: block
     width: 100%
     height: 167px
-    // background-image: url("../img/map.png")
+    background-image: url("../../assets/img/map.png")
     background-position: right bottom
     -webkit-background-size: cover
     -o-background-size: cover

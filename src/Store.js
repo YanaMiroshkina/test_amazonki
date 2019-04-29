@@ -12,26 +12,50 @@ import activities from './stored-data/activities'
 import raspisanie_groups from './stored-data/raspisanie_groups'
 import raspisanie_gym from './stored-data/raspisanie_gym'
 
+
 Vue.use(Vuex)
 
 
+function add_img_path(data, folder) {
+  let length = data.length
+  for (let i=0; i < length; i++) {
+    data[i]['img_path'] = folder + '/' + data[i]['img']
+  }
+  return data
+}
+
 export default new Vuex.Store({
   state: {
-    img_notices,
+    is_mobile: false,
+    img_notices_data: img_notices,
     text_notices,
-    slides_groups,
-    slides_gym,
+    slides_groups_data: slides_groups,
+    slides_gym_data: slides_gym,
     activities_data: activities,
     raspisanie_groups,
     raspisanie_gym
   },
+  mutations: {
+    change_is_mobile (state, payload) {
+      state.is_mobile = payload
+    }
+  },
   getters: {
+    img_notices: state => {
+      return add_img_path(state.img_notices_data, 'notices')
+    },
+    slides_groups: state => {
+      return add_img_path(state.slides_groups_data, 'slides-groups')
+    },
+    slides_gym: state => {
+      return add_img_path(state.slides_gym_data, 'slides-gym')
+    },
     activities: state => {
 
       let activities = state.activities_data,
       groups = state.raspisanie_groups,
       r1 = [],
-      r2 = [];
+      r2 = []
 
       // функция для сортировки
       // дней недели в расписании каждой тренировки
@@ -46,9 +70,9 @@ export default new Vuex.Store({
         }
         
         if (i1 == i2) {
-          return 0;
+          return 0
         }
-        return (sort[i1] < sort[i2]) ? -1 : 1;
+        return (sort[i1] < sort[i2]) ? -1 : 1
       }
 
       // получили массив с ключами-тренировками
@@ -60,12 +84,12 @@ export default new Vuex.Store({
           activity = training['activity'],
           day = training['day'],
           time = training['time'] + ':00',
-          corporative = training['corporative'];
+          corporative = training['corporative']
 
           if (activity) {
-            r1[activity] || (r1[activity] = []);
-            r1[activity][day] || (r1[activity][day] = []);
-            r1[activity][day].push({time, corporative});
+            r1[activity] || (r1[activity] = [])
+            r1[activity][day] || (r1[activity][day] = [])
+            r1[activity][day].push({time, corporative})
           }
         }
       }
@@ -74,13 +98,13 @@ export default new Vuex.Store({
       // и отсортированным по дням недели расписанием
       for (let activity in r1) {
 
-        let days = Object.keys(r1[activity]).sort(sort_activities_days);
+        let days = Object.keys(r1[activity]).sort(sort_activities_days)
 
         for (let i in days) {
-          let day = days[i];
-          r2[activity] || (r2[activity] = []);
-          r2[activity]['days'] || (r2[activity]['days'] = []);
-          r2[activity]['days'].push({'day': day, 'times': r1[activity][day]});
+          let day = days[i]
+          r2[activity] || (r2[activity] = [])
+          r2[activity]['days'] || (r2[activity]['days'] = [])
+          r2[activity]['days'].push({'day': day, 'times': r1[activity][day]})
         }
 
       }
@@ -89,8 +113,8 @@ export default new Vuex.Store({
       // поле 'days' с отсортированным расписанием
       for (let i in activities) {
         let activity_obj = activities[i],
-        activity = activity_obj.title;
-        activity_obj['days'] = r2[activity]['days'];
+        activity = activity_obj.title
+        activity_obj['days'] = r2[activity]['days']
       }
 
       return activities;
@@ -101,19 +125,19 @@ export default new Vuex.Store({
       // мобильное расписание с таблицами по дням недели
 
       let rasp = state.raspisanie_groups,
-      r = [];
+      r = []
 
       for (let i in rasp) {
-        let hour = rasp[i];
+        let hour = rasp[i]
 
         for (let y in hour) {
-          let training = hour[y];
-          r[y] = r[y] || [];
-          r[y].push(training);
+          let training = hour[y]
+          r[y] = r[y] || []
+          r[y].push(training)
         }
       }
 
-      return r;
+      return r
 
     },
     raspisanie_gym_mobile: (state) => {
@@ -123,25 +147,25 @@ export default new Vuex.Store({
       // в ячейках - в какое время какой тренер работает
 
       let rasp = state.raspisanie_gym,
-      r = [];
+      r = []
 
       for (let i in rasp) {
-        let hour = rasp[i];
+        let hour = rasp[i]
 
         for (let y in hour) {
-          let day = hour[y]['day'];
-          r[y] = r[y] || [];
+          let day = hour[y]['day']
+          r[y] = r[y] || []
 
-          r[y]['day'] = hour[y]['day'];
-          r[y]['trainings'] = r[y]['trainings'] || [];
+          r[y]['day'] = hour[y]['day']
+          r[y]['trainings'] = r[y]['trainings'] || []
 
-          let str = !hour[y]['trainer'] ? '' : 'с ' + hour[y]['time'] + ' до ' + (++hour[y]['time']) + ' ' + hour[y]['trainer'];
-          r[y]['trainings'].push(str);
+          let str = !hour[y]['trainer'] ? '' : 'с ' + hour[y]['time'] + ' до ' + (++hour[y]['time']) + ' ' + hour[y]['trainer']
+          r[y]['trainings'].push(str)
         }
 
       }
 
-      return r;
+      return r
 
     }
   }

@@ -1,27 +1,47 @@
 <template lang='pug'>
 
   .modals
-    .modals__list
-      .modal.modal--image.modal--hidden
-        img(src='../../assets/img/notices/1-notices-a.jpg' alt='')
-        .modal__close
-      .modal.modal--me.modal--hidden
+    .modals__list(@click.self='close_modal')
+      .modal.modal--image(:class="{'modal--hidden': (modal_active != 'img')}")
+        img(:src='modal_img_src' alt='')
+        .modal__close(@click.self='close_modal')
+      .modal.modal--me(:class="{'modal--hidden': (modal_active != 'me')}")
         .modal__inner
           p.h3.mb-s Хотите сайт?
           p Напишите мне )
           a(href='mailto:miroshkina388@mail.ru' title='Яна Мирошкина').link.dib.mt-s miroshkina388@mail.ru
-          .modal__close
+          .modal__close(@click.self='close_modal')
+
 
 </template>
 
 <script>
 
-
+import {bus} from '../../main'
 
 export default {
   data () {
     return {
-      
+      modal_active: '',
+      modal_img_src: ''
+    }
+  },
+  created() {
+    bus.$on('open_modal', (data) => {
+      document.documentElement.classList.add('modal-opened')
+      this.modal_active = data.type
+      switch(data.type) {
+        case 'img':
+          this.modal_img_src = './src/assets/img/' + data.img_path
+          break;
+      }
+    })
+  },
+  methods: {
+    close_modal() {
+      this.modal_active = ''
+      this.modal_img_src = ''
+      document.documentElement.classList.remove('modal-opened')
     }
   }
 }

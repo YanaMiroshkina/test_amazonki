@@ -1,8 +1,8 @@
 <template lang='pug'>
 
   article.article.fr.w100
-    //- raspisanie-desktop
-    raspisanie-mobile
+    raspisanie-desktop(v-if='!is_mobile')
+    raspisanie-mobile(v-else-if='is_mobile')
 
     base-button(:base_btn='base_btn')
 
@@ -26,6 +26,11 @@ export default {
         route: 'activities',
         btn_text: 'Посмотреть описание тренировок'
       }
+    }
+  },
+  computed: {
+    is_mobile() {
+      return this.$store.state.is_mobile
     }
   }
 }

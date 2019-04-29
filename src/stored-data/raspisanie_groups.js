@@ -6,7 +6,7 @@ export default [
       day: 'Понедельник',
       time: 8,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -16,7 +16,7 @@ export default [
       day: 'Вторник',
       time: 8,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -26,7 +26,7 @@ export default [
       day: 'Среда',
       time: 8,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -36,7 +36,7 @@ export default [
       day: 'Четверг',
       time: 8,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -46,7 +46,7 @@ export default [
       day: 'Пятница',
       time: 8,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -56,7 +56,7 @@ export default [
       day: 'Суббота',
       time: 8,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -68,7 +68,7 @@ export default [
       day: 'Понедельник',
       time: 9,
       activity: 'Шейпинг',
-      activity_link: 'shaping',
+      activity_anchor: 'shaping',
       new: 0,
       corporative: 0,
       trainer: 'Елена'
@@ -78,7 +78,7 @@ export default [
       day: 'Вторник',
       time: 9,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -88,7 +88,7 @@ export default [
       day: 'Среда',
       time: 9,
       activity: 'Body Sculpt',
-      activity_link: 'body-sculpt',
+      activity_anchor: 'body-sculpt',
       new: 0,
       corporative: 0,
       trainer: 'Жанна'
@@ -98,7 +98,7 @@ export default [
       day: 'Четверг',
       time: 9,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -108,7 +108,7 @@ export default [
       day: 'Пятница',
       time: 9,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -118,7 +118,7 @@ export default [
       day: 'Суббота',
       time: 9,
       activity: 'Body Sculpt',
-      activity_link: 'body-sculpt',
+      activity_anchor: 'body-sculpt',
       new: 0,
       corporative: 0,
       trainer: 'Жанна'
@@ -130,7 +130,7 @@ export default [
       day: 'Понедельник',
       time: 10,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -140,7 +140,7 @@ export default [
       day: 'Вторник',
       time: 10,
       activity: 'Силовой микс',
-      activity_link: 'power-mix',
+      activity_anchor: 'power-mix',
       new: 0,
       corporative: 0,
       trainer: 'Наталья'
@@ -150,7 +150,7 @@ export default [
       day: 'Среда',
       time: 10,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -160,7 +160,7 @@ export default [
       day: 'Четверг',
       time: 10,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -170,7 +170,7 @@ export default [
       day: 'Пятница',
       time: 10,
       activity: 'Step & Sculpt',
-      activity_link: 'step-and-sculpt',
+      activity_anchor: 'step-and-sculpt',
       new: 0,
       corporative: 1,
       trainer: 'Анжелика'
@@ -180,7 +180,7 @@ export default [
       day: 'Суббота',
       time: 10,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -192,7 +192,7 @@ export default [
       day: 'Понедельник',
       time: 11,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -202,7 +202,7 @@ export default [
       day: 'Вторник',
       time: 11,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -212,7 +212,7 @@ export default [
       day: 'Среда',
       time: 11,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -222,7 +222,7 @@ export default [
       day: 'Четверг',
       time: 11,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -232,7 +232,7 @@ export default [
       day: 'Пятница',
       time: 11,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -242,7 +242,7 @@ export default [
       day: 'Суббота',
       time: 11,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -254,7 +254,7 @@ export default [
       day: 'Понедельник',
       time: 12,
       activity: 'Силовой микс',
-      activity_link: 'power-mix',
+      activity_anchor: 'power-mix',
       new: 0,
       corporative: 0,
       trainer: 'Анжелика'
@@ -264,7 +264,7 @@ export default [
       day: 'Вторник',
       time: 12,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -274,7 +274,7 @@ export default [
       day: 'Среда',
       time: 12,
       activity: 'Power Training',
-      activity_link: 'power-training',
+      activity_anchor: 'power-training',
       new: 1,
       corporative: 0,
       trainer: 'Наталья'
@@ -284,7 +284,7 @@ export default [
       day: 'Четверг',
       time: 12,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -294,7 +294,7 @@ export default [
       day: 'Пятница',
       time: 12,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -304,7 +304,7 @@ export default [
       day: 'Суббота',
       time: 12,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -316,7 +316,7 @@ export default [
       day: 'Понедельник',
       time: 13,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -326,7 +326,7 @@ export default [
       day: 'Вторник',
       time: 13,
       activity: 'Interval + Stretch',
-      activity_link: 'interval-plus-stretch',
+      activity_anchor: 'interval-plus-stretch',
       new: 0,
       corporative: 0,
       trainer: 'Ирина'
@@ -336,7 +336,7 @@ export default [
       day: 'Среда',
       time: 13,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -346,7 +346,7 @@ export default [
       day: 'Четверг',
       time: 13,
       activity: 'Йогалатес',
-      activity_link: 'yogalates',
+      activity_anchor: 'yogalates',
       new: 0,
       corporative: 0,
       trainer: 'Ирина'
@@ -356,7 +356,7 @@ export default [
       day: 'Пятница',
       time: 13,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -366,7 +366,7 @@ export default [
       day: 'Суббота',
       time: 13,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -378,7 +378,7 @@ export default [
       day: 'Понедельник',
       time: 14,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -388,7 +388,7 @@ export default [
       day: 'Вторник',
       time: 14,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -398,7 +398,7 @@ export default [
       day: 'Среда',
       time: 14,
       activity: 'Калланетика',
-      activity_link: 'kallanetika',
+      activity_anchor: 'kallanetika',
       new: 0,
       corporative: 0,
       trainer: 'Наталья'
@@ -408,7 +408,7 @@ export default [
       day: 'Четверг',
       time: 14,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -418,7 +418,7 @@ export default [
       day: 'Пятница',
       time: 14,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -428,7 +428,7 @@ export default [
       day: 'Суббота',
       time: 14,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -440,7 +440,7 @@ export default [
       day: 'Понедельник',
       time: 15,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -450,7 +450,7 @@ export default [
       day: 'Вторник',
       time: 15,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -460,7 +460,7 @@ export default [
       day: 'Среда',
       time: 15,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -470,7 +470,7 @@ export default [
       day: 'Четверг',
       time: 15,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -480,7 +480,7 @@ export default [
       day: 'Пятница',
       time: 15,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -490,7 +490,7 @@ export default [
       day: 'Суббота',
       time: 15,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -502,7 +502,7 @@ export default [
       day: 'Понедельник',
       time: 16,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -512,7 +512,7 @@ export default [
       day: 'Вторник',
       time: 16,
       activity: 'Йога',
-      activity_link: 'yoga',
+      activity_anchor: 'yoga',
       new: 1,
       corporative: 0,
       trainer: 'Наталья'
@@ -522,7 +522,7 @@ export default [
       day: 'Среда',
       time: 16,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -532,7 +532,7 @@ export default [
       day: 'Четверг',
       time: 16,
       activity: 'Фитбол',
-      activity_link: 'fitball',
+      activity_anchor: 'fitball',
       new: 0,
       corporative: 0,
       trainer: 'Анжелика'
@@ -542,7 +542,7 @@ export default [
       day: 'Пятница',
       time: 16,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -552,7 +552,7 @@ export default [
       day: 'Суббота',
       time: 16,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -564,7 +564,7 @@ export default [
       day: 'Понедельник',
       time: 17,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -574,7 +574,7 @@ export default [
       day: 'Вторник',
       time: 17,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -584,7 +584,7 @@ export default [
       day: 'Среда',
       time: 17,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -594,7 +594,7 @@ export default [
       day: 'Четверг',
       time: 17,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -604,7 +604,7 @@ export default [
       day: 'Пятница',
       time: 17,
       activity: 'Interval + Stretch',
-      activity_link: 'interval-plus-stretch',
+      activity_anchor: 'interval-plus-stretch',
       new: 0,
       corporative: 0,
       trainer: 'Жанна'
@@ -614,7 +614,7 @@ export default [
       day: 'Суббота',
       time: 17,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -626,7 +626,7 @@ export default [
       day: 'Понедельник',
       time: 18,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -636,7 +636,7 @@ export default [
       day: 'Вторник',
       time: 18,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -646,7 +646,7 @@ export default [
       day: 'Среда',
       time: 18,
       activity: 'Степ-сила',
-      activity_link: 'step-power',
+      activity_anchor: 'step-power',
       new: 0,
       corporative: 0,
       trainer: 'Наталья'
@@ -656,7 +656,7 @@ export default [
       day: 'Четверг',
       time: 18,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -666,7 +666,7 @@ export default [
       day: 'Пятница',
       time: 18,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -676,7 +676,7 @@ export default [
       day: 'Суббота',
       time: 18,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -688,7 +688,7 @@ export default [
       day: 'Понедельник',
       time: 19,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -698,7 +698,7 @@ export default [
       day: 'Вторник',
       time: 19,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -708,7 +708,7 @@ export default [
       day: 'Среда',
       time: 19,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -718,7 +718,7 @@ export default [
       day: 'Четверг',
       time: 19,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -728,7 +728,7 @@ export default [
       day: 'Пятница',
       time: 19,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -738,7 +738,7 @@ export default [
       day: 'Суббота',
       time: 19,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -750,7 +750,7 @@ export default [
       day: 'Понедельник',
       time: 20,
       activity: 'Body Sculpt',
-      activity_link: 'body-sculpt',
+      activity_anchor: 'body-sculpt',
       new: 0,
       corporative: 0,
       trainer: 'Жанна'
@@ -760,7 +760,7 @@ export default [
       day: 'Вторник',
       time: 20,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -770,7 +770,7 @@ export default [
       day: 'Среда',
       time: 20,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -780,7 +780,7 @@ export default [
       day: 'Четверг',
       time: 20,
       activity: 'Body Sculpt',
-      activity_link: 'body-sculpt',
+      activity_anchor: 'body-sculpt',
       new: 0,
       corporative: 0,
       trainer: 'Ирина'
@@ -790,7 +790,7 @@ export default [
       day: 'Пятница',
       time: 20,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -800,7 +800,7 @@ export default [
       day: 'Суббота',
       time: 20,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -812,7 +812,7 @@ export default [
       day: 'Понедельник',
       time: 21,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -822,7 +822,7 @@ export default [
       day: 'Вторник',
       time: 21,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -832,7 +832,7 @@ export default [
       day: 'Среда',
       time: 21,
       activity: 'Power Training',
-      activity_link: 'power-training',
+      activity_anchor: 'power-training',
       new: 0,
       corporative: 0,
       trainer: 'Жанна'
@@ -842,7 +842,7 @@ export default [
       day: 'Четверг',
       time: 21,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''
@@ -852,7 +852,7 @@ export default [
       day: 'Пятница',
       time: 21,
       activity: 'Зумба',
-      activity_link: 'zumba',
+      activity_anchor: 'zumba',
       new: 0,
       corporative: 0,
       trainer: 'Жанна'
@@ -862,7 +862,7 @@ export default [
       day: 'Суббота',
       time: 21,
       activity: '',
-      activity_link: '',
+      activity_anchor: '',
       new: 0,
       corporative: 0,
       trainer: ''

@@ -92,7 +92,7 @@ export default {
   data () {
     return {
       base_btn: {
-        route: '',
+        route: '/',
         btn_text: 'На главную'
       }
     }

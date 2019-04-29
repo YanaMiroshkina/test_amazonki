@@ -12,7 +12,7 @@
         a(itemprop='telephone' href='tel:+74822123456').footer__phone 
           span.screen +7 (4822)
           |  123-456
-      span(data-js-open-modal='me').pulse.fr Создано с&nbsp;
+      span(@click="open_modal('me')").pulse.fr Создано с&nbsp;
         span.heart
           +heart
 
@@ -20,10 +20,17 @@
 
 <script>
 
+import {bus} from '../../main'
+
 export default {
   data () {
     return {
       
+    }
+  },
+  methods: {
+    open_modal: function(type) {
+      bus.$emit('open_modal', {type: type})
     }
   }
 }
@@ -120,6 +127,23 @@ export default {
   -moz-animation: pulse 0.7s ease
   -o-animation: pulse 0.7s ease
   animation: pulse 0.7s ease
+
+/* ==== СТИЛИ, КОТОРЫЕ ДОЛЖНЫ ИДТИ ПОСЛЕДНИМИ ==== */ 
+// находятся тут, потому что футер подключается в DOM последним,
+// и его стили прописываются последними
+
+.w100
+  width: 100%
+
+/* ------- hiding mobile and screen elements ------ */
+
+@media (min-width: 1000px)
+  [class*="mobile"]
+    display: none
+
+@media (max-width: 999px)
+  [class*="screen"]
+    display: none
 
 
 </style>

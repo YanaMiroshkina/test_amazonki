@@ -2,32 +2,52 @@
 
   #app
     modals
-    .wrapper
-      header-block
-      main-block
-      footer-block
+    router-view
 
 </template>
 
 <script>
 
 import TheModals from './components/page-sections/TheModals'
-import TheHeader from './components/page-sections/TheHeader'
-import TheMain from './components/page-sections/TheMain'
-import TheFooter from './components/page-sections/TheFooter'
+
+function debounce(func, wait, immediate) {
+  let timeout;
+  return function() {
+    let context = this, args = arguments,
+    later = function() {
+      timeout = null
+      if (!immediate) func.apply(context, args)
+    },
+    call_now = immediate && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    if (call_now) func.apply(context, args)
+  }
+}
 
 export default {
   name: 'app',
   components: {
-    'modals': TheModals,
-    'header-block': TheHeader,
-    'main-block': TheMain,
-    'footer-block': TheFooter
+    'modals': TheModals
   },
   data () {
     return {
-      
+
     }
+  },
+  methods: {
+    on_resize: function() {
+      this.$store.commit('change_is_mobile', window.innerWidth < 1000)
+    }
+  },
+  created() {
+    this.on_resize()
+  },
+  mounted: function () {
+    window.addEventListener('resize', debounce(this.on_resize, 250))
+  },
+  beforeDestroy: function () {
+    window.removeEventListener('resize', this.on_resize)
   }
 }
 </script>
@@ -198,8 +218,7 @@ input[type='file']
 .color--green
   color: green
 
-// стили для b и i
-.decore-tags 
+.bold-italic-tags 
   b
     font-family: 'liberation-serif-b'
   i
@@ -207,9 +226,6 @@ input[type='file']
   b i,
   i b
     font-family: 'liberation-serif-bi'
-
-.w100
-  width: 100%
 
 .cta
   display: inline-block
@@ -233,6 +249,9 @@ input[type='file']
 .cta:hover
   background-color: #196926
   border: 1px solid #196926
+
+#app
+  height: 100%
 
 .wrapper
   position: relative
@@ -296,16 +315,6 @@ input[type='file']
   transition: opacity 0s, transform 0s
 
 /* ===================== */
-
-/* ------- hiding mobile and screen elements ------ */
-
-@media (min-width: 1000px)
-  [class*="mobile"]
-    display: none
-
-@media (max-width: 999px)
-  [class*="screen"]
-    display: none
 
 
 </style>

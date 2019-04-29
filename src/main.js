@@ -1,27 +1,43 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import './assets/css/normalize.css'
-import './assets/css/fonts.css'
 import store from './Store'
 import App from './App.vue'
 
-// Vue.use(VueRouter)
+// подключаем сразу все файлы стилей
+function requireAll(r) { r.keys().forEach(r); }
+requireAll(require.context('./assets/sass', false, /\.sass$/))
 
-// const routes = [
+import PageAbout from './components/pages/PageAbout'
+import PageRaspisanie from './components/pages/PageRaspisanie'
+import PageActivities from './components/pages/PageActivities'
+import PageUseful from './components/pages/PageUseful'
 
-//   { path: '/', component: PageAbout },
-//   { path: '/activities', component: PageActivities }
+export const bus = new Vue()
 
-// ]
+Vue.use(VueRouter)
 
-// const router = new VueRouter({ 
-//   mode: 'history',
-//   routes 
-// })
+const routes = [
+
+  { path: '/', component: PageAbout },
+  { path: '/raspisanie', component: PageRaspisanie },
+  { path: '/activities', component: PageActivities },
+  { path: '/useful', component: PageUseful }
+
+]
+
+const router = new VueRouter({ 
+  mode: 'history',
+  linkActiveClass: '',
+  linkExactActiveClass: 'active',
+  scrollBehavior() {
+    return {x: 0, y: 0}
+  },
+  routes 
+})
 
 new Vue({
   el: '#app',
   store,
-  // router,
+  router,
   render: h => h(App)
 })

@@ -2,16 +2,16 @@
   include ../../svg-mixins.pug
 
   mixin nav-btn(link, title)
-    a(itemprop='name url' href=link title=title).nav__btn.link= title
+    router-link(@mouseover.native='on_hover' @mouseleave.native='off_hover' ref=(link == '' ? 'about' : link) itemprop='name url' to=('/' + link) title=title).nav__btn.link= title
 
-  header(itemscope itemtype='http://schema.org/WPHeader')
+  header(itemscope itemtype='http://schema.org/WPHeader').header
     nav(itemscope itemtype='http://schema.org/SiteNavigationElement').nav
       a(href='/' title='Амазонки').nav__logo.link
         +logo
-      +nav-btn('/', 'О компании').active.active-style
-      +nav-btn('/raspisanie', 'Расписание')
-      +nav-btn('/activities', 'Тренировки')
-      +nav-btn('/useful', 'Интересное')
+      +nav-btn('', 'О компании')
+      +nav-btn('raspisanie', 'Расписание')
+      +nav-btn('activities', 'Тренировки')
+      +nav-btn('useful', 'Интересное')
       .nav__hover-div
 
 </template>
@@ -19,10 +19,32 @@
 <script>
 
 export default {
+  props: ['active'],
   data () {
     return {
-      
+
     }
+  },
+  methods: {
+    add_active_class(target) {
+      target.classList.add('active')
+    },
+    remove_active_class() {
+      for (let ref in this.$refs) {
+        this.$refs[ref].$el.classList.remove('active')
+      }
+    },
+    on_hover: function(e) {
+      this.remove_active_class()
+      this.add_active_class(e.target)
+    },
+    off_hover: function() {
+      this.remove_active_class()
+      this.add_active_class(this.$refs[this.active].$el)
+    }
+  },
+  mounted() {
+    this.add_active_class(this.$refs[this.active].$el)
   }
 }
 
@@ -30,7 +52,7 @@ export default {
 
 <style lang="sass">
 
-header
+.header
   height: 80px
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
@@ -50,6 +72,7 @@ header
     position: relative
     height: 100%
     z-index: 1
+    cursor: pointer
 
   &__logo
     margin-left: 24px
@@ -93,7 +116,7 @@ header
       -o-transform: translateX(292px)
       transform: translateX(292px)
 
-    &:nth-child(3).active ~ .nav-hover-div
+    &:nth-child(3).active ~ .nav__hover-div
       width: 162px
       -webkit-transform: translateX(454px)
       -moz-transform: translateX(454px)
@@ -101,7 +124,7 @@ header
       -o-transform: translateX(454px)
       transform: translateX(454px)
 
-    &:nth-child(4).active ~ .nav-hover-div
+    &:nth-child(4).active ~ .nav__hover-div
       width: 162px
       -webkit-transform: translateX(616px)
       -moz-transform: translateX(616px)
@@ -109,7 +132,7 @@ header
       -o-transform: translateX(616px)
       transform: translateX(616px)
 
-    &:nth-child(5).active ~ .nav-hover-div
+    &:nth-child(5).active ~ .nav__hover-div
       width: 162px
       -webkit-transform: translateX(778px)
       -moz-transform: translateX(778px)
@@ -123,7 +146,7 @@ header
   /* --------- active and hover on menu ---------- */
 
   .nav
-    &__btn.active-style
+    &__btn.active
       color: white
       text-shadow: 1px 1px 3px green
 

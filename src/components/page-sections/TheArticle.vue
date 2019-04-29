@@ -1,9 +1,9 @@
 <template lang='pug'>
 
-  //- article-about
-  //- article-raspisanie
-  article-activities
-  //- article-useful
+  article-about(v-if="article=='about'")
+  article-raspisanie(v-else-if="article=='raspisanie'")
+  article-activities(v-else-if="article=='activities'")
+  article-useful(v-else-if="article=='useful'")
 
 </template>
 
@@ -15,6 +15,7 @@ import ArticleActivities from '../article-types/ArticleActivities'
 import ArticleUseful from '../article-types/ArticleUseful'
 
 export default {
+  props: ['article'],
   components: {
     ArticleAbout,
     ArticleRaspisanie,

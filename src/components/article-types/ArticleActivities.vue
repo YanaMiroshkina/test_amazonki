@@ -2,7 +2,7 @@
 
   article.article.fr
 
-    slider(:slides='slides_groups' :folder="'groups'")
+    slider(:slides='slides_groups')
 
     section.mb-m
       p.mb-m Физические упражнения улучшают кровоснабжение мозга и других органов, что положительно влияет на их работу. Регулярные тренировки высвобождают энергетические ресурсы организма и помогают стать бодрее и энергичнее, появляется эффект «мышечной радости». А еще тренировка поднимает настроение и обеспечивает крепким и сладким сном.
@@ -21,7 +21,7 @@
 
       a(:id='activity.anchor')
         h4.h4.highlighted.mb-s {{ activity.title }}
-      p.decore-tags(v-html='activity.description')
+      p.bold-italic-tags(v-html='activity.description')
 
       .activity__raspisanie.mobile.mt-xxs
         p(v-for='(training, i) in activity.days' :key='i')
@@ -32,7 +32,7 @@
     section.mb-m
       h2.h2.mb-m.tac Тренажерный зал
 
-      slider(:slides='slides_gym' :folder="'gym'")
+      slider(:slides='slides_gym')
 
       p
         | Занятия в тренажерном зале позволяют увеличить плотность мышц, а также улучшить минерализацию костной ткани за счет усиленного притока крови. А еще такая тренировка поможет улучшить настроение и наградит вас хорошим сном, который положительно скажется на силе воли. Человек, который смог приложить усилие для занятий над собой и хорошо отдохнул после этого, обладает несравненно более высокой силой воли и концентрацией внимания — в сравнении с тем, кто предпочитает менее активный образ жизни.
@@ -77,8 +77,8 @@ export default {
   },
   data () {
     return {
-      slides_groups: this.$store.state.slides_groups,
-      slides_gym: this.$store.state.slides_gym,
+      slides_groups: this.$store.getters.slides_groups,
+      slides_gym: this.$store.getters.slides_gym,
 
       activities: this.$store.getters.activities,
       base_btn: {

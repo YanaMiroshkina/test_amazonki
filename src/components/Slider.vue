@@ -3,13 +3,13 @@
   .slider.mb-l
     .slider__block.cf
       //- клон последнего изображения
-      .slider__item.cloned(:style='[first_clone.style]' :alt='first_clone.alt' :class="{animating: (clone_animating == 'first')}")
+      .slider__item.cloned(@click.self='open_modal(first_clone.img_path)' :style='[first_clone.style]' :alt='first_clone.alt' :class="{animating: (clone_animating == 'first')}")
 
       .slider__content.cf(:class="{'not-animating': move_content_instantly}" :style="{width: slider_items.length * 100 + '%', 'transform': 'translateX(' + slider_position + '%)'}")
-        .slider__item(v-for='slide in slider_items' :style="[slide.style, {'width': 100 / slider_items.length + '%'}]" :alt='slide.alt')
+        .slider__item(@click.self='open_modal(slide.img_path)' v-for='slide in slider_items' :style="[slide.style, {'width': 100 / slider_items.length + '%'}]" :alt='slide.alt')
 
       //- клон первого изображения
-      .slider__item.cloned(:style='[last_clone.style]' :alt='last_clone.alt' :class="{animating: (clone_animating == 'last')}")
+      .slider__item.cloned(@click.self='open_modal(last_clone.img_path)' :style='[last_clone.style]' :alt='last_clone.alt' :class="{animating: (clone_animating == 'last')}")
 
     .slider__arrow.slider__arrow--left(@click='prev_slide')
     .slider__arrow.slider__arrow--right(@click='next_slide')
@@ -19,10 +19,12 @@
 
 <script>
 
-function set_styles(slides, folder) {
+import {bus} from '../main'
+
+function set_styles(slides) {
   let length = slides.length;
   for (let i=0; i < length; i++) {
-    slides[i]['url'] = '../src/assets/img/slides-' + folder + '/' + slides[i]['img'];
+    slides[i]['url'] = '../src/assets/img/' + slides[i]['img_path'];
     slides[i]['style'] = {
       'background-image': 'url(' + slides[i]['url'] + ')',
       'padding-top': 62 / length + '%'
@@ -32,7 +34,7 @@ function set_styles(slides, folder) {
 }
 
 export default {
-  props: ['slides', 'folder'],
+  props: ['slides'],
   data () {
     return {
       active_slide: 1,
@@ -49,7 +51,7 @@ export default {
       return 100 / this.slider_length;
     },
     slider_items() {
-      return set_styles(this.slides, this.folder);
+      return set_styles(this.slides);
     },
     first_clone() {
       return this.slider_items[this.slider_length - 1];
@@ -59,6 +61,10 @@ export default {
     }
   },
   methods: {
+
+    open_modal: function(img_path) {
+      bus.$emit('open_modal', {type: 'img', img_path: img_path})
+    },
 
     set_slider_position: function(slide, t) {
       t.active_slide = slide
