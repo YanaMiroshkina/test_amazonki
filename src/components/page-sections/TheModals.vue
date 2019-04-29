@@ -28,13 +28,13 @@ export default {
   },
   created() {
     bus.$on('open_modal', (data) => {
-      document.documentElement.classList.add('modal-opened')
-      this.modal_active = data.type
       switch(data.type) {
         case 'img':
           this.modal_img_src = './src/assets/img/' + data.img_path
           break
       }
+      this.modal_active = data.type
+      document.documentElement.classList.add('modal-opened')
     })
   },
   methods: {

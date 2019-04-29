@@ -2,13 +2,21 @@
 
   #app
     modals
-    router-view
+    .wrapper
+      header-block
+      transition(name='router-anim')
+        router-view
+      footer-block
 
 </template>
 
 <script>
 
+import {bus} from './main'
+
 import TheModals from './components/page-sections/TheModals'
+import TheHeader from './components/page-sections/TheHeader'
+import TheFooter from './components/page-sections/TheFooter'
 
 function debounce(func, wait, immediate) {
   let timeout;
@@ -28,11 +36,13 @@ function debounce(func, wait, immediate) {
 export default {
   name: 'app',
   components: {
-    'modals': TheModals
+    'modals': TheModals,
+    'header-block': TheHeader,
+    'footer-block': TheFooter
   },
   data () {
     return {
-
+      
     }
   },
   methods: {
@@ -53,6 +63,31 @@ export default {
 </script>
 
 <style lang="sass">
+
+.router-anim-enter-active
+  animation: coming 1s
+  animation-delay: .5s
+  opacity: 0
+
+.router-anim-leave-active
+  animation: going 1s
+
+@keyframes going
+  from
+    transform: translateX(0)
+
+  to
+    transform: translateX(-50px)
+    opacity: 0
+
+@keyframes coming
+  from
+    transform: translateX(-50px)
+    opacity: 0
+
+  to
+    transform: translateX(0)
+    opacity: 1
 
 /* ======= TAGS ======== */
 
@@ -263,8 +298,6 @@ input[type='file']
   margin: 0 auto
   padding: 30px 0 100px
   width: 940px
-  &--error
-    padding: 70px 0 160px
 
 .amazonka
   position: relative

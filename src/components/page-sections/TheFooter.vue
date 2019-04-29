@@ -128,22 +128,6 @@ export default {
   -o-animation: pulse 0.7s ease
   animation: pulse 0.7s ease
 
-/* ==== СТИЛИ, КОТОРЫЕ ДОЛЖНЫ ИДТИ ПОСЛЕДНИМИ ==== */ 
-// находятся тут, потому что футер подключается в DOM последним,
-// и его стили прописываются последними
-
-.w100
-  width: 100%
-
-/* ------- hiding mobile and screen elements ------ */
-
-@media (min-width: 1000px)
-  [class*="mobile"]
-    display: none
-
-@media (max-width: 999px)
-  [class*="screen"]
-    display: none
 
 
 </style>

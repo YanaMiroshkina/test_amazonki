@@ -1,10 +1,7 @@
 <template lang='pug'>
 
-  .wrapper
-    header-block(:active="'raspisanie'")
-    main.main.cf
-      article-block(:article="'raspisanie'")
-    footer-block
+  main.main.cf
+    article-block(:article="'raspisanie'")
 
 </template>
 

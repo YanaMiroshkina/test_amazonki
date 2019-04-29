@@ -19,10 +19,20 @@
 <script>
 
 export default {
-  props: ['active'],
   data () {
     return {
 
+    }
+  },
+  computed: {
+    active: function() {
+      let route = this.$route.path.substr(1)
+      if (this.$route.matched[0].path == '/*') {
+        return ''
+      } else {
+        route = route == '' ? 'about' : route
+      }
+      return route
     }
   },
   methods: {
@@ -40,11 +50,15 @@ export default {
     },
     off_hover: function() {
       this.remove_active_class()
-      this.add_active_class(this.$refs[this.active].$el)
+      if (this.active) {
+        this.add_active_class(this.$refs[this.active].$el)
+      }
     }
   },
   mounted() {
-    this.add_active_class(this.$refs[this.active].$el)
+    if (this.active) {
+      this.add_active_class(this.$refs[this.active].$el)
+    }
   }
 }
 

@@ -11,6 +11,7 @@ import PageAbout from './components/pages/PageAbout'
 import PageRaspisanie from './components/pages/PageRaspisanie'
 import PageActivities from './components/pages/PageActivities'
 import PageUseful from './components/pages/PageUseful'
+import Page404 from './components/pages/Page404'
 
 export const bus = new Vue()
 
@@ -21,7 +22,8 @@ const routes = [
   { path: '/', component: PageAbout },
   { path: '/raspisanie', component: PageRaspisanie },
   { path: '/activities', component: PageActivities },
-  { path: '/useful', component: PageUseful }
+  { path: '/useful', component: PageUseful },
+  { path: '/*', component: Page404 }
 
 ]
 

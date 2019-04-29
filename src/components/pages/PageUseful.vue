@@ -1,11 +1,8 @@
 <template lang='pug'>
 
-  .wrapper
-    header-block(:active="'useful'")
-    main.main.cf
-      aside-block(:aside="'contacts'")
-      article-block(:article="'useful'")
-    footer-block
+  main.main.cf
+    aside-block(:aside="'contacts'")
+    article-block(:article="'useful'")
 
 </template>
 

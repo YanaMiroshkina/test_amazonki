@@ -41,6 +41,7 @@ export default new Vuex.Store({
       email: 'fake-email@yandex.ru',
       vk_group: 'vk.com/fake-vk-group'
     },
+    menu_active: 'about',
 
     is_mobile: false,
     img_notices_data: img_notices,
