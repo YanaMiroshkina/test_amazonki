@@ -4,7 +4,7 @@
     modals
     .wrapper
       header-block
-      transition(name='router-anim')
+      transition(name='animate')
         router-view
       footer-block
 
@@ -64,30 +64,35 @@ export default {
 
 <style lang="sass">
 
-.router-anim-enter-active
-  animation: coming 1s
-  animation-delay: .5s
+/* ======= Анимация загрузки страницы ======= */
+
+.animate-enter-active
+  transition: opacity 0.27s ease-out, transform 0.27s cubic-bezier(0.34, 1.05, 0.79, 1.24)
+  animation: coming .27s
+  animation-delay: .27s
   opacity: 0
 
-.router-anim-leave-active
-  animation: going 1s
+.animate-leave-active
+  transition: opacity 0.27s ease-out, transform 0.27s cubic-bezier(0.34, 1.05, 0.79, 1.24)
+  animation: going .27s
 
 @keyframes going
   from
-    transform: translateX(0)
+    transform: translateY(0)
 
   to
-    transform: translateX(-50px)
+    transform: translateY(7px)
     opacity: 0
 
 @keyframes coming
   from
-    transform: translateX(-50px)
+    transform: translateY(7px)
     opacity: 0
 
   to
-    transform: translateX(0)
+    transform: translateY(0)
     opacity: 1
+
 
 /* ======= TAGS ======== */
 
@@ -332,20 +337,6 @@ input[type='file']
   -o-background-size: cover
   background-size: cover
   border: 0
-
-/* ======== АНИМАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ ======= */
-
-.main
-  opacity: 1
-  transform: translate3d(0, 0, 0)
-
-  /* previous transition opacity was ease-out */
-  transition: opacity 0.27s ease-out, transform 0.27s cubic-bezier(0.34, 1.05, 0.79, 1.24)
-
-.animated-main-content
-  opacity: 0
-  transform: translate3d(0, 0, -1.5px)
-  transition: opacity 0s, transform 0s
 
 /* ===================== */
 

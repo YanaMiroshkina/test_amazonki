@@ -1,8 +1,9 @@
 <template lang='pug'>
 
   article.article.fr.w100
-    raspisanie-desktop(v-if='!is_mobile')
-    raspisanie-mobile(v-else-if='is_mobile')
+    transition(name='animate')
+      raspisanie-desktop(v-if='!is_mobile')
+      raspisanie-mobile(v-else-if='is_mobile')
 
     base-button(:base_btn='base_btn')
 

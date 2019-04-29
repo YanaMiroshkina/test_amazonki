@@ -20,18 +20,22 @@
         span
           span(itemprop='name') Женский фитнес-клуб
             span(itemprop='brand')  «Амазонки»
+        address(itemprop='address' itemscope itemtype='http://schema.org/PostalAddress')
+          span(itemprop='addressLocality')  {{ club_info.city }}
+          |, 
+          span(itemprop='streetAddress')  {{ club_info.street_address }}
         address
           | тел.:
           span(itemprop='telephone')
-            a(href='tel:+74822123456')
-              span.dn  +7 (4822)
-              |  123-456
+            a(:href="'tel:+7' + club_info.phone_code + club_info.phone_number")
+              span.dn +7 ({{ club_info.phone_code }}) 
+              |  {{ club_info.phone_number_formatted }}
         address
           | email:
-          a(itemprop='email' href='fake-email@yandex.ru')  fake-email@yandex.ru
+          a(itemprop='email' :href="'mailto:' + club_info.email")  {{ club_info.email }}
         address
           | Мы ВКонтакте:
-          a(itemprop='sameAs' href='//vk.com/fake-vk-group' target='_blank')  vk.com/fake-vk-group
+          a(itemprop='sameAs' :href="'/' + club_info.vk_group" target='_blank')  {{ club_info.vk_group }}
 
       p.mt-s Приглашаем фитнес-инструктора по йоге в нашу дружную команду.
 
@@ -65,6 +69,7 @@ export default {
   },
   data () {
     return {
+      club_info: this.$store.getters.club_info,
       base_btn: {
         route: 'raspisanie',
         btn_text: 'Посмотреть расписание'
