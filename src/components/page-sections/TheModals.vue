@@ -33,7 +33,7 @@ export default {
       switch(data.type) {
         case 'img':
           this.modal_img_src = './src/assets/img/' + data.img_path
-          break;
+          break
       }
     })
   },

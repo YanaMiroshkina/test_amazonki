@@ -21,19 +21,18 @@
           span(itemprop='brand') Амазонки
           |»
         address(itemprop='address' itemscope itemtype='http://schema.org/PostalAddress')
-          |г. 
-          span(itemprop='addressLocality')  Тверь
+          span(itemprop='addressLocality')  {{ club_info.city }}
           |, 
-          span(itemprop='streetAddress')  ул. Тестовая, 1
+          span(itemprop='streetAddress')  {{ club_info.street_address }}
         address тел.: 
           span(itemprop='telephone')  
-            a(href='tel:+74822123456')
-              span.dn +7 (4822) 
-              | 123-456
+            a(:href="'tel:+7' + club_info.phone_code + club_info.phone_number")
+              span.dn +7 ({{ club_info.phone_code }}) 
+              | {{ club_info.phone_number_formatted }}
         address.mt-s email: 
-          a(itemprop='email' href='mailto:fake-email@yandex.ru').color-green fake-email@yandex.ru
+          a(itemprop='email' :href="'mailto:' + club_info.email").color-green {{ club_info.email }}
         address ВК: 
-          a(itemprop='sameAs' href='//vk.com/' target='_blank' title='Фитнес-клуб «Амазонки» в Твери').color--green  vk.com/fake-vk-group
+          a(itemprop='sameAs' :href="'/' + club_info.vk_group" target='_blank' title='Фитнес-клуб «Амазонки» в Твери').color--green  {{ club_info.vk_group }}
         a(href='https://api-maps.yandex.ru/frame/v1/-/C6a3RWpH' title='Посмотреть на карте женский фитнес-клуб «Амазонки» в Твери' target='_blank').aside__map.mt-s
 
 
@@ -48,6 +47,8 @@ export default {
   props: ['aside'],
   data () {
     return {
+      club_info: this.$store.getters.club_info,
+
       img_notices: this.$store.getters.img_notices,
       text_notices: this.$store.state.text_notices
     }

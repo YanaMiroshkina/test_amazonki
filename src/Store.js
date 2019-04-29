@@ -24,8 +24,24 @@ function add_img_path(data, folder) {
   return data
 }
 
+function format_phone_number(club_info) {
+  let arr = club_info.phone_number.split('')
+  arr.splice(3, 0, '-')
+  club_info['phone_number_formatted'] = arr.join('')
+  return club_info
+}
+
 export default new Vuex.Store({
   state: {
+    club_info: {
+      city: 'Тверь',
+      street_address: 'ул. Тестовая, 1',
+      phone_code: '4822',
+      phone_number: '123456',
+      email: 'fake-email@yandex.ru',
+      vk_group: 'vk.com/fake-vk-group'
+    },
+
     is_mobile: false,
     img_notices_data: img_notices,
     text_notices,
@@ -41,6 +57,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    club_info: state => {
+      return format_phone_number(state.club_info)
+    },
     img_notices: state => {
       return add_img_path(state.img_notices_data, 'notices')
     },

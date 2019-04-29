@@ -7,11 +7,11 @@
         span(itemprop='name') Амазонки
         span.screen ,&nbsp;2011-2018
       address(itemprop='address' itemscope itemtype='http://schema.org/PostalAddress').footer__contacts
-        span(itemprop='addressLocality') Тверь,
-          span(itemprop='streetAddress')  ул. Тестовая, 1.
-        a(itemprop='telephone' href='tel:+74822123456').footer__phone 
-          span.screen +7 (4822)
-          |  123-456
+        span(itemprop='addressLocality') {{ club_info.city }},
+          span(itemprop='streetAddress')  {{ club_info.street_address }}.
+        a(itemprop='telephone' :href="'tel:+7' + club_info.phone_code + club_info.phone_number").footer__phone 
+          span.screen +7 ({{ club_info.phone_code }})
+          |  {{ club_info.phone_number_formatted }}
       span(@click="open_modal('me')").pulse.fr Создано с&nbsp;
         span.heart
           +heart
@@ -25,7 +25,7 @@ import {bus} from '../../main'
 export default {
   data () {
     return {
-      
+      club_info: this.$store.getters.club_info
     }
   },
   methods: {
