@@ -39,18 +39,17 @@
 
       p.mt-s Приглашаем фитнес-инструктора по йоге в нашу дружную команду.
 
-      iframe(class="yandex-map mt-l" title="Посмотреть женский фитнес-клуб &quot;Амазонки&quot; на карте Твери" src="")
-      //- iframe(class="yandex-map mt-l" title="Посмотреть женский фитнес-клуб &quot;Амазонки&quot; на карте Твери" src="https://api-maps.yandex.ru/frame/v1/-/C6a3RWpH")
+      iframe(class="yandex-map mt-l" title="Посмотреть женский фитнес-клуб &quot;Амазонки&quot; на карте Твери" src="https://api-maps.yandex.ru/frame/v1/-/C6a3RWpH")
 
     section.ff-istok-i
       | Вы можете посмотреть 
-      a(href='raspisanie' title='Расписание тренировок женского фитнес-клуба «Амазонки»').ff-istok-bi.color--green Расписание
+      router-link(to='raspisanie' title='Расписание тренировок женского фитнес-клуба «Амазонки»').ff-istok-bi.color--green Расписание
       |  занятий в нашем фитнес-клубе, 
       br
       | почитать краткое описание тренировок и посмотреть фотографии клуба на странице 
-      a(href='activities' title='Описание тренировок женского фитнес-клуба «Амазонки»').ff-istok-bi.color--green Тренировки
+      router-link(to='activities' title='Описание тренировок женского фитнес-клуба «Амазонки»').ff-istok-bi.color--green Тренировки
       | , а еще у нас есть 
-      a(href='useful' title='Полезная информация').ff-istok-bi.color--green интересная и полезная информация
+      router-link(to='useful' title='Полезная информация').ff-istok-bi.color--green интересная и полезная информация
       |  для вас!
 
     base-button(:base_btn='base_btn')

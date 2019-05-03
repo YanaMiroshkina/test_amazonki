@@ -340,5 +340,7 @@ input[type='file']
 
 /* ===================== */
 
+.w100
+  width: 100%!important
 
 </style>

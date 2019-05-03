@@ -3,9 +3,7 @@ import VueRouter from 'vue-router'
 import store from './Store'
 import App from './App.vue'
 
-// подключаем сразу все файлы стилей
-function requireAll(r) { r.keys().forEach(r); }
-requireAll(require.context('./assets/sass', false, /\.sass$/))
+import favicon from '../favicon.ico'
 
 import PageAbout from './components/pages/PageAbout'
 import PageRaspisanie from './components/pages/PageRaspisanie'
@@ -43,3 +41,15 @@ new Vue({
   router,
   render: h => h(App)
 })
+
+// ВЫНОСИМ ЭТО В КОНЕЦ main.js,
+// чтобы в dev- и build-сборке файлы стилей из папки assets/sass
+// подключались после стилей компонентов.
+// Если этого не сделать,
+// @media-стили могут быть переопределены обычными стилями из компонентов
+
+// подключаем сразу все файлы стилей
+function requireAll(r) { r.keys().forEach(r); }
+requireAll(require.context('./assets/sass', false, /\.sass$/))
+// загружаем в production-сборку все-все картинки из папки img/
+requireAll(require.context('./assets/img/', true))

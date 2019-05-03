@@ -1,3 +1,13 @@
+/* ------- hiding mobile and screen elements ------ */
+
+@media (min-width: 1000px)
+  [class*="mobile"]
+    display: none
+
+@media (max-width: 999px)
+  [class*="screen"]
+    display: none
+
 /* ======== WIDE MOBILE < 1000px ======== */
 
 @media (max-width: 999px)
@@ -30,22 +40,18 @@
         width: auto
         height: 100%
 
-    &__btn:nth-child(2),
-    &__btn:nth-child(3),
-    &__btn:nth-child(4),
-    &__btn:nth-child(5)
+    &__btn
       padding: 5px 12px
       width: auto
-
-    &__btn.active
-      color: white
-      text-shadow: 1px 1px 3px green
-      background: rgba(0, 165, 20, 0.31)
-      border: 1px solid #7dda7d
-      -webkit-border-radius: 5px
-      border-radius: 5px
-      -webkit-box-shadow: inset 0 0 17px -4px rgba(0, 0, 0, 0.2)
-      box-shadow: inset 0 0 17px -4px rgba(0, 0, 0, 0.2)
+      &.active
+        color: white
+        text-shadow: 1px 1px 3px green
+        background: rgba(0, 165, 20, 0.31)
+        border: 1px solid #7dda7d
+        -webkit-border-radius: 5px
+        border-radius: 5px
+        -webkit-box-shadow: inset 0 0 17px -4px rgba(0, 0, 0, 0.2)
+        box-shadow: inset 0 0 17px -4px rgba(0, 0, 0, 0.2)
 
   /* --- width on large mobile 100% --- */
   .mobw100

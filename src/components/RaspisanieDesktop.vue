@@ -33,6 +33,9 @@
           td(v-for='training in row')
             span
               template(v-if='training.activity')
+                //- оставляем ссылки на описание тренировок в виде a(href),
+                //- так как router-link не будет прокручивать к хэшу
+                //- по умолчанию
                 a(:href="'activities#' + training.activity_anchor")
                   strong(v-html="(training.corporative && training.activity) ? 'Корпоративная группа ' + training.activity + ',' : (training.activity ? training.activity + ',' : '')").ff-istok-b
                 | {{ training.trainer || '' }}

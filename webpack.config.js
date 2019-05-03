@@ -1,41 +1,19 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const UglifyJsPlugin = require('uglify-js-plugin')
-var MiniCssExtractPlugin = require('mini-css-extract-plugin')
-var CleanWebpacktPlugin = require("clean-webpack-plugin")
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-// var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var HtmlWebpackPlugin = require("vue-html-webpack-plugin")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpacktPlugin = require("clean-webpack-plugin")
+const HtmlWebpackPlugin = require("vue-html-webpack-plugin")
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    // publicPath: '/dist/',
     filename: 'build.js'
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          process.env.NODE_ENV !== 'production'
-            ? 'vue-style-loader'
-            : MiniCssExtractPlugin.loader,
-          'css-loader'
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          process.env.NODE_ENV !== 'production'
-            ? 'vue-style-loader'
-            : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ],
-      },
       {
         test: /\.sass$/,
         use: [
@@ -108,7 +86,13 @@ module.exports = {
           path.resolve(__dirname, 'src/assets/img/')
         ],
         use: [
-          'file-loader?name=./src/assets/img/[name].[ext]'
+          'file-loader?name=[path][name].[ext]'
+        ]
+      },
+      {
+        test: /\.ico$/,
+        use: [
+          'file-loader?name=[path][name].[ext]'
         ]
       }
     ]
@@ -134,26 +118,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'style.css'
     }),
-    // new MiniCssExtractPlugin({
-    //   // Options similar to the same options in webpackOptions.output
-    //   // both options are optional
-    //   filename: '[name].css',
-    //   chunkFilename: '[id].css',
-    // })
     new HtmlWebpackPlugin({
       vue: true
     })
   ],
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        sourceMap: true,
-        compress: {
-          warnings: false,
-        },
-      }),
-    ],
-  },
+    minimizer: [new UglifyJsPlugin()]
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -165,12 +136,6 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   sourceMap: true,
-    //   compress: {
-    //     warnings: false
-    //   }
-    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })

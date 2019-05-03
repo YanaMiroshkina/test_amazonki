@@ -6,7 +6,7 @@
 
   header(itemscope itemtype='http://schema.org/WPHeader').header
     nav(itemscope itemtype='http://schema.org/SiteNavigationElement').nav
-      a(href='/' title='Амазонки').nav__logo.link
+      router-link(to='/' title='Амазонки').nav__logo.link
         +logo
       +nav-btn('', 'О компании')
       +nav-btn('raspisanie', 'Расписание')
@@ -28,6 +28,7 @@ export default {
     active: function() {
       let route = this.$route.path.substr(1)
       if (this.$route.matched[0].path == '/*') {
+        // если 404 страница - нет активного пункта меню
         return ''
       } else {
         route = route == '' ? 'about' : route
@@ -102,6 +103,7 @@ export default {
     line-height: 32px
 
   &__btn
+    width: 162px
     font-size: 20px
     line-height: 80px
     text-align: center
@@ -110,17 +112,6 @@ export default {
     -ms-transition: color 0.2s, text-shadow 0.2s
     -o-transition: color 0.2s, text-shadow 0.2s
     transition: color 0.2s, text-shadow 0.2s
-    &:nth-child(2)
-      width: 162px
-
-    &:nth-child(3)
-      width: 162px
-
-    &:nth-child(4)
-      width: 162px
-
-    &:nth-child(5)
-      width: 162px
 
     &:nth-child(2).active ~ .nav__hover-div
       width: 162px
