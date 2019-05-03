@@ -3,16 +3,16 @@
   .slider.mb-l
     .slider__block.cf
       //- клон последнего изображения
-      .slider__item.cloned(@click.self='open_modal(first_clone.img_path)' :style='[first_clone.style]' :alt='first_clone.alt' :class="{animating: (clone_animating == 'first')}")
+      .slider__item.cloned(ref='first_clone' @click.self='open_modal(first_clone.img_path)' :style="[first_clone.style, {'transform': 'translateX(-100%)'}]" :alt='first_clone.alt' :class="{animating: (clone_animating == 'first')}")
 
-      .slider__content.cf(:class="{'not-animating': move_content_instantly}" :style="{width: slider_items.length * 100 + '%', 'transform': 'translateX(' + slider_position + '%)'}")
+      .slider__content.cf(ref='slider_content' :style="{width: slider_items.length * 100 + '%', 'transform': 'translateX(' + slider_position + '%)'}")
         .slider__item(@click.self='open_modal(slide.img_path)' v-for='slide in slider_items' :style="[slide.style, {'width': 100 / slider_items.length + '%'}]" :alt='slide.alt')
 
       //- клон первого изображения
-      .slider__item.cloned(@click.self='open_modal(last_clone.img_path)' :style='[last_clone.style]' :alt='last_clone.alt' :class="{animating: (clone_animating == 'last')}")
+      .slider__item.cloned(ref='last_clone' @click.self='open_modal(last_clone.img_path)' :style="[last_clone.style, {'transform': 'translateX(100%)'}]" :alt='last_clone.alt' :class="{animating: (clone_animating == 'last')}")
 
-    .slider__arrow.slider__arrow--left(@click='prev_slide')
-    .slider__arrow.slider__arrow--right(@click='next_slide')
+    .slider__arrow.slider__arrow--left(@click="set_slide('prev')")
+    .slider__arrow.slider__arrow--right(@click="set_slide('next')")
 
 
 </template>
@@ -33,31 +33,34 @@ function set_styles(slides) {
   return slides;
 }
 
+let requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
+window.requestAnimationFrame = requestAnimationFrame
+
 export default {
   props: ['slides'],
   data () {
     return {
+      animation_is_going: false,
       active_slide: 1,
       slider_position: 0,
-      move_content_instantly: false,
       clone_animating: ''
     }
   }, 
   computed: {
     slider_length() {
-      return this.slider_items.length;
+      return this.slider_items.length
     },
     slider_step() {
-      return 100 / this.slider_length;
+      return 100 / this.slider_length
     },
     slider_items() {
-      return set_styles(this.slides);
+      return set_styles(this.slides)
     },
     first_clone() {
-      return this.slider_items[this.slider_length - 1];
+      return this.slider_items[this.slider_length - 1]
     },
     last_clone() {
-      return this.slider_items[0];
+      return this.slider_items[0]
     }
   },
   methods: {
@@ -66,50 +69,75 @@ export default {
       bus.$emit('open_modal', {type: 'img', img_path: img_path})
     },
 
-    set_slider_position: function(slide, t) {
-      t.active_slide = slide
-      t.slider_position = -(t.active_slide - 1) * t.slider_step
-    },
-
-    move_clone: function(clone) {
+    set_slide: function(dirrection) {
       let t = this
-      t.clone_animating = clone
-      new Promise((resolve) => {
-        setTimeout(() => {
-          t.move_content_instantly = true
-          let slide = clone == 'last' ? 1 : t.slider_length
-          t.set_slider_position(slide, t)
-          t.clone_animating = ''
-          resolve(t)
-        }, 400)
-      }).then((t) => {
-        return setTimeout(() => {
-          t.move_content_instantly = false
-        })
-      })
-    },
 
-    open_slide: function(id) {
-      this.set_slider_position(id, this)
-      if (id > this.slider_length) {
-        this.move_clone('last')
-      } else if (id < 1) {
-        this.move_clone('first')
-      }
-    },
+      if (t.animation_is_going) return
 
-    next_slide: function() {
-      if (this.active_slide <= this.slider_length) {
-        this.active_slide++
-        this.open_slide(this.active_slide)
+      t.animation_is_going = true
+      if (dirrection == 'next') {
+        ++t.active_slide
+      } else {
+        --t.active_slide
       }
-    },
+      t.clone_animating = t.active_slide > t.slider_length ? 'last' : (t.active_slide < 1 ? 'first' : '')
+        
+      let duration = 300,
+      start = (new Date()).getTime(),
+      end = start + duration,
+      regexp = /^(?:translateX\()((?:\-?)[0-9]+(?:\.)?[0-9]*)(?:\%\))$/,
+      left = t.$refs['slider_content'].style.transform,
+      end_left = -(t.active_slide - 1) * t.slider_step
 
-    prev_slide: function() {
-      if (this.active_slide >= 1) {
-        this.active_slide--
-        this.open_slide(this.active_slide)
+      left = +left.match(regexp)[1]
+
+      if (this.clone_animating) {
+        var cl = t.clone_animating + '_clone',
+        clone_left = +t.$refs[cl].style.transform.match(regexp)[1],
+        end_clone_left = 0
       }
+
+      let return_slider = () => {
+        switch(t.clone_animating) {
+          case 'first': 
+            t.$refs[cl].style.transform = 'translateX(-100%)'
+            t.active_slide = t.slider_length
+            t.slider_position = -(100 - t.slider_step)
+            break
+          case 'last':
+            t.$refs[cl].style.transform = 'translateX(100%)'
+            t.active_slide = 1
+            t.slider_position = 0
+            break
+        }
+        t.clone_animating = ''
+      }
+
+      let step = () => {
+        let timestamp = (new Date()).getTime()
+
+        if (timestamp < end) {
+          let progress = (timestamp - start) / duration,
+          result = left + (end_left - left) * progress
+          t.slider_position = result
+
+          if (t.clone_animating) {
+            let clone_result = clone_left + (end_clone_left - clone_left) * progress
+            t.$refs[cl].style.transform = 'translateX(' + clone_result + '%)'
+          }
+          requestAnimationFrame(step)
+
+        } else if (timestamp >= end) {
+          // докручиваем слайд до конца
+          t.slider_position = end_left
+          if (t.clone_animating) {
+            t.$refs[cl].style.transform = 'translateX(0%)'
+            return_slider()
+          }
+          this.animation_is_going = false
+        }
+      }
+      step()
     }
 
   }
@@ -130,9 +158,6 @@ export default {
 
   &__content
     position: relative
-    transition: transform 0.3s
-    &.not-animating
-      transition: none
 
   &__item
     display: inline-block
@@ -155,24 +180,8 @@ export default {
       width: 100%
       height: 100%
 
-      &:first-child
-        -webkit-transform: translateX(-100%)
-        -moz-transform: translateX(-100%)
-        -ms-transform: translateX(-100%)
-        -o-transform: translateX(-100%)
-        transform: translateX(-100%)
-
-      &:last-child
-        -webkit-transform: translateX(100%)
-        -moz-transform: translateX(100%)
-        -ms-transform: translateX(100%)
-        -o-transform: translateX(100%)
-        transform: translateX(100%)
-
       &.animating
         opacity: 1
-        transition: transform 0.3s
-        transform: translateX(0)
         z-index: 2
 
   &__arrow
@@ -184,6 +193,7 @@ export default {
     font-weight: bold
     color: rgb(2, 175, 2)
     cursor: pointer
+    z-index: 2
 
     &:before
       display: block
