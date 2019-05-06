@@ -3,13 +3,13 @@
   .slider.mb-l
     .slider__block.cf
       //- клон последнего изображения
-      .slider__item.cloned(ref='first_clone' @click.self='open_modal(first_clone.img_path)' :style="[first_clone.style, {'transform': 'translateX(-100%)'}]" :alt='first_clone.alt' :class="{animating: (clone_animating == 'first')}")
+      .slider__item.cloned(ref='first_clone' @click.self='open_modal(first_clone.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchend.self.stop.prevent='ontouchend' :style="[first_clone.style, {'transform': 'translateX(-100%)'}]" :alt='first_clone.alt' :class="{animating: (clone_animating == 'first')}")
 
       .slider__content.cf(ref='slider_content' :style="{width: slider_items.length * 100 + '%', 'transform': 'translateX(' + slider_position + '%)'}")
-        .slider__item(@click.self='open_modal(slide.img_path)' v-for='slide in slider_items' :style="[slide.style, {'width': 100 / slider_items.length + '%'}]" :alt='slide.alt')
+        .slider__item(@click.self='open_modal(slide.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchend.self.stop.prevent='ontouchend' v-for='slide in slider_items' :style="[slide.style, {'width': 100 / slider_items.length + '%'}]" :alt='slide.alt')
 
       //- клон первого изображения
-      .slider__item.cloned(ref='last_clone' @click.self='open_modal(last_clone.img_path)' :style="[last_clone.style, {'transform': 'translateX(100%)'}]" :alt='last_clone.alt' :class="{animating: (clone_animating == 'last')}")
+      .slider__item.cloned(ref='last_clone' @click.self='open_modal(last_clone.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchend.self.stop.prevent='ontouchend' :style="[last_clone.style, {'transform': 'translateX(100%)'}]" :alt='last_clone.alt' :class="{animating: (clone_animating == 'last')}")
 
     .slider__arrow.slider__arrow--left(@click="set_slide('prev')")
     .slider__arrow.slider__arrow--right(@click="set_slide('next')")
@@ -43,7 +43,10 @@ export default {
       animation_is_going: false,
       active_slide: 1,
       slider_position: 0,
-      clone_animating: ''
+      clone_animating: '',
+
+      initial_point: 0,
+      final_point: 0
     }
   }, 
   computed: {
@@ -64,6 +67,33 @@ export default {
     }
   },
   methods: {
+
+    /* SWIPE SLIDER */ 
+
+    ontouchstart: function(e) {
+      this.initial_point = e.changedTouches[0]
+    },
+
+    ontouchend: function(e) {
+      this.final_point = e.changedTouches[0]
+
+      let xAbs = Math.abs(this.initial_point.pageX - this.final_point.pageX),
+      yAbs = Math.abs(this.initial_point.pageY - this.final_point.pageY)
+
+      if (xAbs > 20 || yAbs > 20) {
+        if (xAbs > yAbs) {
+          if (this.final_point.pageX < this.initial_point.pageX) {
+            /* SWIPE LEFT */
+            this.set_slide('next')
+          } else {
+            /* SWIPE RIGHT */
+            this.set_slide('prev')
+          }
+        }
+      } else {
+        e.target.click()
+      }
+    },
 
     open_modal: function(img_path) {
       bus.$emit('open_modal', {type: 'img', img_path: img_path})
@@ -91,7 +121,7 @@ export default {
 
       left = +left.match(regexp)[1]
 
-      if (this.clone_animating) {
+      if (t.clone_animating) {
         var cl = t.clone_animating + '_clone',
         clone_left = +t.$refs[cl].style.transform.match(regexp)[1],
         end_clone_left = 0
