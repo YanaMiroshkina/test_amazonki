@@ -25,6 +25,9 @@ export default {
     }
   },
   computed: {
+    is_mobile() {
+      return this.$store.state.is_mobile
+    },
     active: function() {
       let route = this.$route.path.substr(1)
       if (this.$route.matched[0].path == '/*') {
@@ -46,13 +49,17 @@ export default {
       }
     },
     on_hover: function(e) {
-      this.remove_active_class()
-      this.add_active_class(e.target)
+      if (!this.is_mobile) {
+        this.remove_active_class()
+        this.add_active_class(e.target)
+      }
     },
     off_hover: function() {
-      this.remove_active_class()
-      if (this.active) {
-        this.add_active_class(this.$refs[this.active].$el)
+      if (!this.is_mobile) {
+        this.remove_active_class()
+        if (this.active) {
+          this.add_active_class(this.$refs[this.active].$el)
+        }
       }
     }
   },

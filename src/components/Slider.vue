@@ -3,13 +3,13 @@
   .slider.mb-l
     .slider__block.cf
       //- клон последнего изображения
-      .slider__item.cloned(ref='first_clone' @click.self='open_modal(first_clone.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchend.self.stop.prevent='ontouchend' :style="[first_clone.style, {'transform': 'translateX(-100%)'}]" :alt='first_clone.alt' :class="{animating: (clone_animating == 'first')}")
+      .slider__item.cloned(ref='first_clone' @click.self='open_modal(first_clone.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchmove.self.stop.prevent='ontouchmove' @touchend.self.stop.prevent='ontouchend' :style="[first_clone.style, {'transform': 'translateX(-100%)'}]" :alt='first_clone.alt' :class="{animating: (clone_animating == 'first')}")
 
       .slider__content.cf(ref='slider_content' :style="{width: slider_items.length * 100 + '%', 'transform': 'translateX(' + slider_position + '%)'}")
-        .slider__item(@click.self='open_modal(slide.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchend.self.stop.prevent='ontouchend' v-for='slide in slider_items' :style="[slide.style, {'width': 100 / slider_items.length + '%'}]" :alt='slide.alt')
+        .slider__item(@click.self='open_modal(slide.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchmove.self.stop.prevent='ontouchmove' @touchend.self.stop.prevent='ontouchend' v-for='slide in slider_items' :style="[slide.style, {'width': 100 / slider_items.length + '%'}]" :alt='slide.alt')
 
       //- клон первого изображения
-      .slider__item.cloned(ref='last_clone' @click.self='open_modal(last_clone.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchend.self.stop.prevent='ontouchend' :style="[last_clone.style, {'transform': 'translateX(100%)'}]" :alt='last_clone.alt' :class="{animating: (clone_animating == 'last')}")
+      .slider__item.cloned(ref='last_clone' @click.self='open_modal(last_clone.img_path)' @touchstart.self.stop.prevent='ontouchstart' @touchmove.self.stop.prevent='ontouchmove' @touchend.self.stop.prevent='ontouchend' :style="[last_clone.style, {'transform': 'translateX(100%)'}]" :alt='last_clone.alt' :class="{animating: (clone_animating == 'last')}")
 
     .slider__arrow.slider__arrow--left(@click="set_slide('prev')")
     .slider__arrow.slider__arrow--right(@click="set_slide('next')")
@@ -68,31 +68,36 @@ export default {
   },
   methods: {
 
-    /* SWIPE SLIDER */ 
+    /* SWIPE */ 
 
     ontouchstart: function(e) {
       this.initial_point = e.changedTouches[0]
     },
 
-    ontouchend: function(e) {
+    // отслеживаем конечную координату на touchmove,
+    // поскольку если присваивать final_point на touchend,
+    // иногда странным образом initial_point меняется с final_point
+    // и слайдер перелистывается в противоположную сторону
+    ontouchmove: function(e) {
       this.final_point = e.changedTouches[0]
+    },
 
+    ontouchend: function(e) {
       let xAbs = Math.abs(this.initial_point.pageX - this.final_point.pageX),
       yAbs = Math.abs(this.initial_point.pageY - this.final_point.pageY)
 
-      if (xAbs > 20 || yAbs > 20) {
-        if (xAbs > yAbs) {
-          if (this.final_point.pageX < this.initial_point.pageX) {
-            /* SWIPE LEFT */
-            this.set_slide('next')
-          } else {
-            /* SWIPE RIGHT */
-            this.set_slide('prev')
-          }
+      if (xAbs > 40 && xAbs > yAbs) {
+        if (this.final_point.pageX < this.initial_point.pageX) {
+          /* SWIPE LEFT */
+          this.set_slide('next')
+        } else {
+          /* SWIPE RIGHT */
+          this.set_slide('prev')
         }
-      } else {
+      } else if (xAbs < 10 || yAbs < 10) {
         e.target.click()
       }
+
     },
 
     open_modal: function(img_path) {
@@ -111,13 +116,19 @@ export default {
         --t.active_slide
       }
       t.clone_animating = t.active_slide > t.slider_length ? 'last' : (t.active_slide < 1 ? 'first' : '')
-        
-      let duration = 300,
+
+      t.open_slide(t.active_slide)
+
+    },
+
+    open_slide: function(slide) {
+      let t = this,
+      duration = 300,
       start = (new Date()).getTime(),
       end = start + duration,
       regexp = /^(?:translateX\()((?:\-?)[0-9]+(?:\.)?[0-9]*)(?:\%\))$/,
       left = t.$refs['slider_content'].style.transform,
-      end_left = -(t.active_slide - 1) * t.slider_step
+      end_left = -(slide - 1) * t.slider_step
 
       left = +left.match(regexp)[1]
 
@@ -127,6 +138,9 @@ export default {
         end_clone_left = 0
       }
 
+      // моментальное возвращение основного контента со слайдами
+      // в нужное положение после того, как показали слайд-клон
+      // при круговой прокрутке
       let return_slider = () => {
         switch(t.clone_animating) {
           case 'first': 
@@ -143,6 +157,8 @@ export default {
         t.clone_animating = ''
       }
 
+      // пошаговое изменение transform: translateX()
+      // на requestAnimationFrame
       let step = () => {
         let timestamp = (new Date()).getTime()
 

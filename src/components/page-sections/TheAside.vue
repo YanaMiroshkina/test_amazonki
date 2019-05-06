@@ -12,7 +12,7 @@
 
     template(v-if="aside=='contacts'")
 
-      .aside__inner.mb-m(itemscope itemtype='http://schema.org/Organization')
+      .aside__inner.screen.mb-m(itemscope itemtype='http://schema.org/Organization')
         h2.h2.mb-s Контакты
         
         p

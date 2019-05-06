@@ -99,6 +99,7 @@ export default {
   position: relative
   margin-top: 50px
   margin-bottom: 50px
+  max-width: 80%
   width: auto
   height: auto
   -webkit-box-shadow: 1px 0 11px rgba(0, 0, 0, 0.4)
@@ -216,7 +217,7 @@ export default {
 /* ----------- MODAL HIDDEN ----------- */
 
 .modal--hidden
-  display: block
+  display: inline
   position: absolute
   width: 0
   height: 0
