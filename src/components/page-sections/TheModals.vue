@@ -195,7 +195,7 @@ export default {
       transition: background 0.3s
       background: rgba(17, 66, 11, 0.4)
 
-  .modal
+  .modal:not(.modal--hidden)
     visibility: visible
     opacity: 1
     -webkit-transform: scale(1)
@@ -216,8 +216,11 @@ export default {
 /* ----------- MODAL HIDDEN ----------- */
 
 .modal--hidden
+  display: block
+  position: absolute
   width: 0
   height: 0
+  z-index: -1
 
   & > *,
   &:before,

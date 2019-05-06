@@ -2,9 +2,9 @@
   include ../../svg-mixins.pug
 
   footer(itemscope itemtype='http://schema.org/WPFooter').footer
-    div(itemscope itemtype='http://schema.org/Organization').footer__inner
+    div(itemscope itemtype='http://schema.org/Organization').footer__inner.cf
       span.footer__copyright © 
-        span(itemprop='name') Амазонки
+        span(itemprop='name') &laquo;Амазонки&raquo;
         span.screen ,&nbsp;2011-2018
       address(itemprop='address' itemscope itemtype='http://schema.org/PostalAddress').footer__contacts
         span(itemprop='addressLocality') {{ club_info.city }},
