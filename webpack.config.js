@@ -106,7 +106,9 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+    host: '192.168.0.136',
+    port: 8080
   },
   performance: {
     hints: false
@@ -119,6 +121,8 @@ module.exports = {
       filename: 'style.css'
     }),
     new HtmlWebpackPlugin({
+      title: 'Test Amazonki',
+      meta: {viewport: 'width=device-width,initial-scale=1.0'},
       vue: true
     })
   ],
